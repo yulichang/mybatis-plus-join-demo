@@ -76,4 +76,14 @@ class MpJoinTest {
         iPage.getRecords().forEach(System.out::println);
     }
 
+    @Test
+    void tt() {
+        IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
+                new MPJJoinLambdaQueryWrapper<>()
+                        .selectAll(UserDO.class)
+                        .select(UserAddressDO::getAddress)
+                        .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                        .eq(UserDO::getId, 1));
+    }
+
 }
