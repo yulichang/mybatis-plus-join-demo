@@ -44,3 +44,5 @@ area表
 |postcode|varchar|邮编|
 
 [数据库DDL](https://gitee.com/best_handsome/mybatis-plus-join-demo/blob/master/src/main/resources/db/schema.sql)
+
+[数据库数据记录](https://gitee.com/best_handsome/mybatis-plus-join-demo/blob/master/src/main/resources/db/data.sql)
