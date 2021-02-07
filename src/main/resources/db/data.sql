@@ -1,0 +1,75 @@
+DELETE FROM area;
+
+INSERT INTO area (id, province, city, area, postcode) VALUES (10001, '北京', '北京', '东城区', '10001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10002, '上海', '上海', '浦东新区', '20001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10003, '浙江省1', '杭州市1', '西湖区1', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10004, '浙江省2', '杭州市2', '西湖区2', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10005, '浙江省3', '杭州市3', '西湖区3', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10006, '浙江省4', '杭州市4', '西湖区4', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10007, '浙江省5', '杭州市5', '西湖区5', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10008, '浙江省6', '杭州市6', '西湖区6', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10009, '浙江省7', '杭州市7', '西湖区7', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10010, '浙江省8', '杭州市8', '西湖区8', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10011, '浙江省9', '杭州市9', '西湖区9', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10012, '浙江省0', '杭州市0', '西湖区0', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10013, '浙江省q', '杭州市q', '西湖区q', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10014, '浙江省w', '杭州市w', '西湖区w', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10015, '浙江省e', '杭州市e', '西湖区e', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10016, '浙江省r', '杭州市r', '西湖区r', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10017, '浙江省y', '杭州市y', '西湖区y', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10018, '浙江省u', '杭州市u', '西湖区u', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10019, '浙江省i', '杭州市i', '西湖区i', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10020, '浙江省o', '杭州市o', '西湖区o', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10021, '浙江省p', '杭州市p', '西湖区p', '30001');
+INSERT INTO area (id, province, city, area, postcode) VALUES (10022, '浙江省a', '杭州市a', '西湖区a', '30001');
+
+DELETE FROM user;
+
+INSERT INTO user (id, name, sex, head_img) VALUES ( 1, '张三 1', 1, ' 1http://url-zhangsan');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 2, '李四 2', 0, ' 2http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 3, '李四 3', 0, ' 3http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 4, '李四 4', 0, ' 4http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 5, '李四 5', 0, ' 5http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 6, '李四 6', 0, ' 6http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 7, '李四 7', 0, ' 7http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 8, '李四 8', 0, ' 8http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES ( 9, '李四 9', 0, ' 9http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (10, '李四10', 0, '10http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (11, '李四11', 0, '11http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (12, '李四12', 0, '12http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (13, '李四13', 0, '13http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (14, '李四14', 0, '14http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (15, '李四15', 0, '15http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (16, '李四16', 0, '16http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (17, '李四17', 0, '17http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (18, '李四18', 0, '18http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (19, '李四19', 0, '19http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (20, '李四20', 0, '20http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (21, '李四21', 0, '21http://url-lisi');
+INSERT INTO user (id, name, sex, head_img) VALUES (22, '李四22', 0, '22http://url-lisi');
+
+
+DELETE FROM user_address;
+
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 1, 1, 10001, '13111111101', '01天安门');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 2, 2, 10002, '13222222202', '02东方明珠');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 3, 3, 10003, '13333333303', '03雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 4, 4, 10004, '13333333304', '04雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 5, 5, 10005, '13333333305', '05雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 6, 6, 10006, '13333333306', '06雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 7, 7, 10007, '13333333307', '07雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 8, 8, 10008, '13333333308', '08雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES ( 9, 9, 10009, '13333333309', '09雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (10,10, 10010, '13333333310', '10雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (11,11, 10011, '13333333311', '11雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (12,12, 10012, '13333333312', '12雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (13,13, 10013, '13333333313', '13雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (14,14, 10014, '13333333314', '14雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (15,15, 10015, '13333333315', '15雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (16,16, 10016, '13333333316', '16雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (17,17, 10017, '13333333317', '17雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (18,18, 10018, '13333333318', '18雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (19,19, 10019, '13333333319', '19雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (20,20, 10020, '13333333320', '20雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (21,21, 10021, '13333333321', '21雷峰塔');
+INSERT INTO user_address (id, user_id, area_id, tel, address) VALUES (22,22, 10022, '13333333322', '22雷峰塔');
