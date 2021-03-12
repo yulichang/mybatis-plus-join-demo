@@ -27,4 +27,22 @@ public class UserDTO {
     private String city;
     /** area */
     private String area;
+
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", nameName='" + nameName + '\'' +
+                ", sex=" + sex +
+                ", headImg='" + headImg + '\'' +
+                ", userHeadImg='" + userHeadImg + '\'' +
+                ", tel='" + tel + '\'' +
+                ", address='" + address + '\'' +
+                ", userAddress='" + userAddress + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
+                '}';
+    }
 }

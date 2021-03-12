@@ -2,6 +2,7 @@ package com.example.mpp.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.github.yulichang.injector.MPJSqlInjector;
 import com.github.yulichang.interceptor.MPJInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +26,10 @@ public class MybatisPlusConfig {
         //连表插件
         interceptor.addInnerInterceptor(new MPJInterceptor());
         return interceptor;
+    }
+
+    @Bean
+    public MPJSqlInjector mySqlInjector() {
+        return new MPJSqlInjector();
     }
 }

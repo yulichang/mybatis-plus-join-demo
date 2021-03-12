@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("user_address")
 public class UserAddressDO {
 

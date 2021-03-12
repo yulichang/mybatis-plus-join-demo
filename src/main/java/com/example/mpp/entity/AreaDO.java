@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("area")
 public class AreaDO {

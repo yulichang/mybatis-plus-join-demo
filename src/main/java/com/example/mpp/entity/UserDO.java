@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.mpp.enums.Sex;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("user")
 public class UserDO {
 

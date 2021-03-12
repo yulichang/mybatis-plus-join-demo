@@ -1,12 +1,18 @@
 package com.example.mpp;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mpp.dto.UserDTO;
 import com.example.mpp.entity.AreaDO;
 import com.example.mpp.entity.UserAddressDO;
 import com.example.mpp.entity.UserDO;
 import com.example.mpp.mapper.UserMapper;
+import com.github.yulichang.common.JoinLambdaWrapper;
+import com.github.yulichang.common.support.alisa.AliasLambdaQueryWrapper;
+import com.github.yulichang.common.support.alisa.AliasQueryWrapper;
+import com.github.yulichang.common.support.func.S;
 import com.github.yulichang.query.MPJLambdaQueryWrapper;
 import com.github.yulichang.wrapper.MPJJoinLambdaQueryWrapper;
 import org.junit.jupiter.api.Test;
@@ -23,27 +29,29 @@ class MpJoinTest {
     @Resource
     private UserMapper userMapper;
 
-    /**
-     * 分页查询
-     */
-    @Test
-    void joinTest() {
-        IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10).setOptimizeCountSql(false), UserDTO.class,
-                new MPJLambdaQueryWrapper<UserDO>()
-                        .selectAll(UserDO.class)
-                        .select("addr.tel", "addr.address", "a.province", "a.city", "a.area")
-                        .leftJoin("user_address addr on t.id = addr.user_id")
-                        .leftJoin("area a on a.id = addr.area_id")
-                        .stringQuery()
-                        .eq("a.id", "1"));
-        iPage.getRecords().forEach(System.out::println);
-    }
+
 
     /**
-     * 普通查询
+     * @see MPJLambdaQueryWrapper
      */
     @Test
     void test1() {
+        IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10).setOptimizeCountSql(false),
+                UserDTO.class,
+                new MPJLambdaQueryWrapper<UserDO>()
+                        .selectAll(UserDO.class)
+                        .stringQuery()
+                        .select("addr.tel", "addr.address", "a.province", "a.city", "a.area")
+                        .leftJoin("user_address addr on t.id = addr.user_id")
+                        .leftJoin("area a on a.id = addr.area_id")
+                        .eq("t.id", 1));
+    }
+
+    /**
+     * @see MPJLambdaQueryWrapper
+     */
+    @Test
+    void test2() {
         List<UserDTO> list = userMapper.selectJoinList(UserDTO.class,
                 new MPJLambdaQueryWrapper<UserDO>()
                         .selectAll(UserDO.class)
@@ -55,29 +63,22 @@ class MpJoinTest {
                         .stringQuery()
                         .like(true, "addr.tel", "1")
                         .le(true, "a.province", "1"));
-
-        list.forEach(System.out::println);
     }
 
     /**
-     * leftJoin支持条件,false是不会添加连表查询
+     * @see MPJJoinLambdaQueryWrapper
      */
     @Test
-    void test2() {
+    void test3() {
         IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 new MPJJoinLambdaQueryWrapper<UserDO>()
                         .selectAll(UserDO.class)
-//                        .select(UserAddressDO::getTel)
-//                        .selectAs(UserAddressDO::getAddress, UserDTO::getUserAddress)
-//                        .select(AreaDO::getProvince, AreaDO::getCity)
                         .leftJoin(false, UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
                         .leftJoin(false, AreaDO.class, AreaDO::getId, UserAddressDO::getAreaId));
-
-        iPage.getRecords().forEach(System.out::println);
     }
 
     @Test
-    void tt() {
+    void test4() {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 new MPJJoinLambdaQueryWrapper<>()
                         .selectAll(UserDO.class)
@@ -86,4 +87,37 @@ class MpJoinTest {
                         .eq(UserDO::getId, 1));
     }
 
+    @Test
+    void test5() {
+        List<UserDTO> userDTO = userMapper.joinTest(new JoinLambdaWrapper<>()
+                .eq(UserDO::getId, "1")
+                .eq(UserAddressDO::getUserId, "1"));
+    }
+
+    @Test
+    void test6() {
+        List<UserDTO> userDTO = userMapper.joinTestAlias(new AliasQueryWrapper<>()
+                .setAlias("u")
+                .eq("id", "1")//u.id
+                .like("sex", "3")//u.sex
+                .eq("ua.tel", "10086")
+                .like("ua.address", "北京"));
+    }
+
+    @Test
+    void test7() {
+        List<UserDTO> dto = userMapper.joinTestAliasS(new QueryWrapper<UserDO>()
+                .eq(S.a(UserDO::getId), "1")//a.id
+                .gt(S.a(UserDO::getSex), "3")//a.sex
+                .eq(S.b(UserAddressDO::getTel), "10086")//b.tel
+                .like(S.b(UserAddressDO::getAddress), "北京"));//b.address
+    }
+
+    @Test
+    void test8() {
+        List<UserDTO> dto = userMapper.joinTestAliasS(new AliasLambdaQueryWrapper<UserDO>()
+                .setAlias("a")
+                .eq(UserDO::getId, "1")//a.id
+                .gt(UserDO::getSex, "3"));//a.sex
+    }
 }
