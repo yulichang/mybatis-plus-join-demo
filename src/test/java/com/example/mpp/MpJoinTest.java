@@ -105,7 +105,7 @@ class MpJoinTest {
 
     @Test
     void test7() {
-        List<UserDTO> dto = userMapper.joinTestAliasS(new QueryWrapper<UserDO>()
+        List<UserDTO> dto = userMapper.joinTestAliasF(new QueryWrapper<UserDO>()
                 .eq(S.a(UserDO::getId), "1")//a.id
                 .gt(S.a(UserDO::getSex), "3")//a.sex
                 .eq(S.b(UserAddressDO::getTel), "10086")//b.tel
