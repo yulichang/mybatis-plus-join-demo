@@ -25,6 +25,6 @@ public interface UserMapper extends MPJBaseMapper<UserDO> {
     @Select("select u.*,ua.tel from user u left join user_address ua on u.id = ua.user_id ${ew.customSqlSegment}")
     List<UserDTO> joinTestAlias(@Param(Constants.WRAPPER) Wrapper<?> queryWrapper);
 
-    @Select("select a.*,b.tel from user a left join user_address b on a.id = b.user_id ${ew.customSqlSegment}")
+    @Select("select a.*,b.tel from user a left join user_address b on a.id = b.user_id ${ew.customSqlSegment(\"a\")}")
     List<UserDTO> joinTestAliasS(@Param(Constants.WRAPPER) Wrapper<?> queryWrapper);
 }

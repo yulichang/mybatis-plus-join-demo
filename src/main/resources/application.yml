@@ -9,6 +9,8 @@ spring:
 mybatis-plus:
   typeEnumsPackage: com.example.mpp.enums
   global-config:
+    db-config:
+      logic-delete-field: del
     banner: true
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

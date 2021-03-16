@@ -7,7 +7,8 @@ create table area
     province varchar(255) null,
     city     varchar(255) null,
     area     varchar(255) null,
-    postcode varchar(255) null
+    postcode varchar(255) null,
+    del bit(1)
 );
 
 DROP TABLE IF EXISTS user;
@@ -18,7 +19,8 @@ create table user
         primary key,
     name     varchar(255) not null,
     sex      tinyint      not null,
-    head_img varchar(255) not null
+    head_img varchar(255) not null,
+    del bit(1)
 );
 
 DROP TABLE IF EXISTS user_address;
@@ -30,5 +32,6 @@ create table user_address
     user_id int          null,
     area_id int          null,
     tel     varchar(255) null,
-    address varchar(255) null
+    address varchar(255) null,
+    del bit(1)
 );

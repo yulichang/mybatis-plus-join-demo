@@ -2,7 +2,7 @@ package com.example.mpp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.sql.SqlScriptUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mpp.dto.UserDTO;
 import com.example.mpp.entity.AreaDO;
@@ -10,10 +10,11 @@ import com.example.mpp.entity.UserAddressDO;
 import com.example.mpp.entity.UserDO;
 import com.example.mpp.mapper.UserMapper;
 import com.github.yulichang.common.JoinLambdaWrapper;
-import com.github.yulichang.common.support.alisa.AliasLambdaQueryWrapper;
-import com.github.yulichang.common.support.alisa.AliasQueryWrapper;
+import com.github.yulichang.common.support.alias.AliasLambdaQueryWrapper;
+import com.github.yulichang.common.support.alias.AliasQueryWrapper;
 import com.github.yulichang.common.support.func.S;
 import com.github.yulichang.query.MPJLambdaQueryWrapper;
+import com.github.yulichang.query.MPJQueryWrapper;
 import com.github.yulichang.wrapper.MPJJoinLambdaQueryWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,8 +30,6 @@ class MpJoinTest {
     @Resource
     private UserMapper userMapper;
 
-
-
     /**
      * @see MPJLambdaQueryWrapper
      */
@@ -38,9 +37,8 @@ class MpJoinTest {
     void test1() {
         IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10).setOptimizeCountSql(false),
                 UserDTO.class,
-                new MPJLambdaQueryWrapper<UserDO>()
+                new MPJQueryWrapper<UserDO>()
                         .selectAll(UserDO.class)
-                        .stringQuery()
                         .select("addr.tel", "addr.address", "a.province", "a.city", "a.area")
                         .leftJoin("user_address addr on t.id = addr.user_id")
                         .leftJoin("area a on a.id = addr.area_id")
@@ -80,12 +78,13 @@ class MpJoinTest {
     @Test
     void test4() {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
-                new MPJJoinLambdaQueryWrapper<>()
+                new MPJJoinLambdaQueryWrapper<UserDO>()
                         .selectAll(UserDO.class)
                         .select(UserAddressDO::getAddress)
                         .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
                         .eq(UserDO::getId, 1));
     }
+
 
     @Test
     void test5() {
@@ -116,7 +115,6 @@ class MpJoinTest {
     @Test
     void test8() {
         List<UserDTO> dto = userMapper.joinTestAliasS(new AliasLambdaQueryWrapper<UserDO>()
-                .setAlias("a")
                 .eq(UserDO::getId, "1")//a.id
                 .gt(UserDO::getSex, "3"));//a.sex
     }
