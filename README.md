@@ -12,7 +12,7 @@ mybatis-plus-join演示工程
 * mybatis-plus
 * h2
 
-## 表结构
+### 表结构
 
 user表
 
