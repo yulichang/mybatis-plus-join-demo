@@ -12,6 +12,11 @@ mybatis-plus-join演示工程
 * mybatis-plus
 * h2
 
+#### 项目结构
+
+* join-demo 多表查询演示工程
+* mapping-demo 一对一，一对多关系映射演示工程
+
 ### 表结构
 
 user表
@@ -38,9 +43,9 @@ area表
 |column|type|说明|
 |---|---|---|
 |id|int|主键|
-|province|province|省|
+|province|varchar|省|
 |city|varchar|市|
-|area|province|区|
+|area|varchar|区|
 |postcode|varchar|邮编|
 
 [数据库DDL](https://gitee.com/best_handsome/mybatis-plus-join-demo/blob/master/src/main/resources/db/schema.sql)
