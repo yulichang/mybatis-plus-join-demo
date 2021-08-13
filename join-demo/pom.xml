@@ -6,7 +6,6 @@
         <groupId>com.github.yulichang</groupId>
         <artifactId>mybatis-plus-join-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>join-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
