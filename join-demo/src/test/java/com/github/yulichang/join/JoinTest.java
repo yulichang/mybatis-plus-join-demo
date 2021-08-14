@@ -60,6 +60,7 @@ class JoinTest {
 
     /**
      * 简单的分页关联查询 lambda
+     * ON语句多条件
      */
     @Test
     void test3() {
@@ -67,12 +68,29 @@ class JoinTest {
                 Wrappers.<UserDO>lambdaJoin()
                         .selectAll(UserDO.class)
                         .select(UserAddressDO::getAddress)
-                        .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                        .leftJoin(UserAddressDO.class, on -> on
+                                .eq(UserDO::getId, UserAddressDO::getUserId)
+                                .eq(UserDO::getId, UserAddressDO::getUserId))
                         .eq(UserDO::getId, 1)
                         .and(i -> i.eq(UserDO::getHeadImg, "er")
                                 .or()
-                                .eq(UserAddressDO::getUserId, 1)));
+                                .eq(UserAddressDO::getUserId, 1))
+                        .eq(UserDO::getId, 1));
         page.getRecords().forEach(System.out::println);
+    }
+
+    /**
+     * 简单的函数使用
+     */
+    @Test
+    void test4() {
+        UserDTO one = userMapper.selectJoinOne(UserDTO.class, Wrappers.<UserDO>lambdaJoin()
+                .selectSum(UserDO::getId)
+                .selectMax(UserDO::getId, UserDTO::getHeadImg)
+//                .selectFunc(FuncEnum.IF_SEX, UserDO::getSex, UserDO::getName)
+                .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                .eq(UserDO::getId, 1));
+        System.out.println(one);
     }
 
 
@@ -104,6 +122,24 @@ class JoinTest {
                 .select(UserAddressDO::getAddress)
                 .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
                 .eq(UserDO::getId, 1));
+        list.forEach(System.out::println);
+    }
+
+
+    /**
+     * 子查询
+     */
+    @Test
+    void test8() {
+        List<UserDTO> list = userMapper.selectJoinList(UserDTO.class,
+                Wrappers.<UserDO>lambdaJoin()
+                        .selectQuery(UserAddressDO.class, q -> q
+                                        .select(UserAddressDO::getAddress)
+                                        .eq(UserDO::getId, UserAddressDO::getUserId),
+                                UserDTO::getAddress)
+                        .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                        .leftJoin(AreaDO.class, AreaDO::getId, UserAddressDO::getAreaId)
+                        .eq(UserDO::getId, UserDO::getId));
         list.forEach(System.out::println);
     }
 
