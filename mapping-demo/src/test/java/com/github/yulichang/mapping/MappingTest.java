@@ -1,9 +1,9 @@
 package com.github.yulichang.mapping;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.yulichang.base.MPJBaseDeepService;
 import com.github.yulichang.mapping.entity.UserDO;
-import com.github.yulichang.mapping.service.UserService;
+import com.github.yulichang.mapping.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,12 +15,12 @@ import java.util.List;
  * 映射只对MPJBaseDeepService中的方法有效果 ，一般以Deep结尾，比如 getByIdDeep listByIdsDeep 等
  * 如果不需要关系映射就使用mybatis plus原生方法即可，比如 getById listByIds 等
  *
- * @see MPJBaseDeepService
+ * @see com.github.yulichang.base.service.MPJDeepService
  */
 @SpringBootTest
 class MappingTest {
     @Resource
-    private UserService userService;
+    private UserMapper userMapper;
 
     /**
      * 根据id查询
@@ -35,7 +35,7 @@ class MappingTest {
      */
     @Test
     void test1() {
-        UserDO deep = userService.getByIdDeep(2);
+        UserDO deep = userMapper.selectByIdDeep(1);
         System.out.println(deep);
     }
 
@@ -52,7 +52,7 @@ class MappingTest {
      */
     @Test
     void test2() {
-        List<UserDO> list = userService.listDeep();
+        List<UserDO> list = userMapper.selectListDeep(Wrappers.emptyWrapper());
         list.forEach(System.out::println);
     }
 
@@ -63,8 +63,9 @@ class MappingTest {
      */
     @Test
     void test3() {
-        Page<UserDO> page = userService.pageDeep(new Page<>(2, 2));
+        Page<UserDO> page = userMapper.selectPageDeep(new Page<>(2, 2), Wrappers.emptyWrapper());
         page.getRecords().forEach(System.out::println);
     }
+
 
 }
