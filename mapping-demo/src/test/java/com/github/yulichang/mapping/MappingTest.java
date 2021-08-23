@@ -35,7 +35,7 @@ class MappingTest {
      */
     @Test
     void test1() {
-        UserDO deep = userMapper.selectByIdDeep(1);
+        UserDO deep = userMapper.selectByIdDeep(2);
         System.out.println(deep);
     }
 
