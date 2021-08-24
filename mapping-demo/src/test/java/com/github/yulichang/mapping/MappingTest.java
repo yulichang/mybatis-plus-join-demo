@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  * 一对一，一对多关系映射查询
- * 映射只对MPJBaseDeepService中的方法有效果 ，一般以Deep结尾，比如 getByIdDeep listByIdsDeep 等
- * 如果不需要关系映射就使用mybatis plus原生方法即可，比如 getById listByIds 等
+ * 映射只对UserMapper中的方法有效果 ，一般以Deep结尾，比如 selectByIdDeep selectListDeep 等
+ * 如果不需要关系映射就使用mybatis plus原生方法即可，比如 selectById selectList 等
  *
  * @see com.github.yulichang.base.service.MPJDeepService
  */
