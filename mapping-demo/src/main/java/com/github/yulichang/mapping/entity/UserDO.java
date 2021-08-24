@@ -12,7 +12,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @ToString
@@ -29,45 +28,31 @@ public class UserDO {
     @TableLogic
     private Boolean del;
 
-//    /**
-//     * 查询上级 一对一
-//     */
-//    @TableField(exist = false)
-//    @EntityMapping(thisField = "pid", joinField = "id")
-//    private UserDO pUser;
-//
-//    /**
-//     * 查询下级 一对多
-//     */
-//    @TableField(exist = false)
-//    @EntityMapping(thisField = "id", joinField = "pid", select = "id,name")
-//    private List<UserDO> childUser;
-//
-//    /**
-//     * 查询下级 一对多
-//     */
-//    @TableField(exist = false)
-//    @FieldMapping(tag = UserDO.class, thisField = "id", joinField = "pid", select = "id")
-//    private List<Integer> childIds;
-
     /**
      * 查询上级 一对一
      */
     @TableField(exist = false)
-    @EntityMapping(tag = UserDO.class, thisField = "pid", joinField = "id", thisMapKey = "PID", joinMapKey = "ID")
-    private Map<String, Object> pUser;
+    @EntityMapping(thisField = "pid", joinField = "id")
+    private UserDO pUser;
 
     /**
      * 查询下级 一对多
      */
     @TableField(exist = false)
-    @EntityMapping(tag = UserDO.class, thisField = "id", joinField = "pid", select = "id,name", thisMapKey = "ID", joinMapKey = "PID")
-    private List<Map<String, Object>> childUser;
+    @EntityMapping(thisField = "id", joinField = "pid")
+    private List<UserDO> childUser;
 
     /**
-     * 查询下级 一对多
+     * 查询地址 (一对多)
      */
     @TableField(exist = false)
-    @FieldMapping(tag = UserDO.class, thisField = "id", joinField = "pid", select = "id", thisMapKey = "ID", joinMapKey = "PID")
+    @EntityMapping(thisField = "id", joinField = "userId")
+    private List<UserAddressDO> addressList;
+
+    /**
+     * 绑定字段 （一对多）
+     */
+    @TableField(exist = false)
+    @FieldMapping(tag = UserDO.class, thisField = "id", joinField = "pid", select = "id")
     private List<Integer> childIds;
 }

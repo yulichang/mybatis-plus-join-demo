@@ -16,7 +16,6 @@ public class UserAddressDO {
     @TableId
     private Integer id;
     private Integer userId;
-    private Integer areaId;
     private String tel;
     private String address;
     @TableLogic
