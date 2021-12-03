@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 @Data
 @ToString
 @Accessors(chain = true)
+@EqualsAndHashCode
 @TableName("user_address")
 public class UserAddressDO {
 

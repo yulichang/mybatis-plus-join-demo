@@ -4,7 +4,7 @@ create table user
 (
     id       int auto_increment
         primary key,
-    pid      int not null,
+    parent_id      int not null,
     name     varchar(255) not null,
     sex      tinyint      not null,
     head_img varchar(255) not null,
