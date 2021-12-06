@@ -23,30 +23,30 @@ INSERT INTO area (id, province, city, area, postcode, del) VALUES (10020, '山�
 INSERT INTO area (id, province, city, area, postcode, del) VALUES (10021, '山东省21', '菏泽21', '曹县21', '80021', false);
 INSERT INTO area (id, province, city, area, postcode, del) VALUES (10022, '山东省22', '菏泽22', '曹县22', '80022', false);
 
-DELETE FROM user;
+DELETE FROM `user`;
 
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 1, '张三01', 1, 'https://url-01', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 2, '李四02', 0, 'https://url-02', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 3, '李四03', 0, 'https://url-03', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 4, '李四04', 0, 'https://url-04', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 5, '李四05', 0, 'https://url-05', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 6, '李四06', 0, 'https://url-06', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 7, '李四07', 0, 'https://url-07', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 8, '李四08', 0, 'https://url-08', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES ( 9, '李四09', 0, 'https://url-09', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (10, '李四10', 0, 'https://url-10', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (11, '李四11', 0, 'https://url-11', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (12, '李四12', 0, 'https://url-12', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (13, '李四13', 0, 'https://url-13', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (14, '李四14', 0, 'https://url-14', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (15, '李四15', 0, 'https://url-15', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (16, '李四16', 0, 'https://url-16', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (17, '李四17', 0, 'https://url-17', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (18, '李四18', 0, 'https://url-18', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (19, '李四19', 0, 'https://url-19', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (20, '李四20', 0, 'https://url-20', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (21, '李四21', 0, 'https://url-21', false);
-INSERT INTO user (id, name, sex, head_img, del) VALUES (22, '李四22', 0, 'https://url-22', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 1, '张三01', 1, 'https://url-01', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 2, '李四02', 0, 'https://url-02', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 3, '李四03', 0, 'https://url-03', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 4, '李四04', 0, 'https://url-04', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 5, '李四05', 0, 'https://url-05', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 6, '李四06', 0, 'https://url-06', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 7, '李四07', 0, 'https://url-07', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 8, '李四08', 0, 'https://url-08', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES ( 9, '李四09', 0, 'https://url-09', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (10, '李四10', 0, 'https://url-10', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (11, '李四11', 0, 'https://url-11', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (12, '李四12', 0, 'https://url-12', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (13, '李四13', 0, 'https://url-13', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (14, '李四14', 0, 'https://url-14', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (15, '李四15', 0, 'https://url-15', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (16, '李四16', 0, 'https://url-16', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (17, '李四17', 0, 'https://url-17', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (18, '李四18', 0, 'https://url-18', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (19, '李四19', 0, 'https://url-19', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (20, '李四20', 0, 'https://url-20', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (21, '李四21', 0, 'https://url-21', false);
+INSERT INTO `user` (id, name, sex, head_img, del) VALUES (22, '李四22', 0, 'https://url-22', false);
 
 
 DELETE FROM user_address;

@@ -11,6 +11,8 @@ mybatis-plus:
   global-config:
     db-config:
       logic-delete-field: del
+      logic-delete-value: true
+      logic-not-delete-value: false
     banner: true
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

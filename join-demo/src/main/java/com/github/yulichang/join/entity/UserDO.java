@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 @EqualsAndHashCode
-@TableName("user")
+@TableName("`user`")
 public class UserDO {
 
     @TableId
