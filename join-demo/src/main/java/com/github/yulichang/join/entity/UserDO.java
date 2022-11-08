@@ -25,6 +25,8 @@ public class UserDO {
 
     private String headImg;
 
+    private Integer addressId;
+
     @TableLogic
     private Boolean del;
 }

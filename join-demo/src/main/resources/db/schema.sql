@@ -17,7 +17,8 @@ create table `user`
 (
     id       int auto_increment
         primary key,
-    name     varchar(255) not null,
+    `name`     varchar(255) not null,
+    `address_id`     int not null,
     sex      tinyint      not null,
     head_img varchar(255) not null,
     del bit

@@ -1,8 +1,11 @@
 package com.github.yulichang.join.dto;
 
+import com.github.yulichang.join.entity.AddressDO;
 import com.github.yulichang.join.enums.Sex;
 import lombok.Data;
 import lombok.ToString;
+
+import java.util.List;
 
 /**
  * userDTO
@@ -32,4 +35,6 @@ public class UserDTO {
     private String city;
     /** area */
     private String area;
+
+    private List<AddressDO> addressList;
 }

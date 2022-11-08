@@ -1,15 +1,20 @@
 package com.github.yulichang.join;
 
-import com.baomidou.mybatisplus.core.metadata.*;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.join.dto.UserDTO;
+import com.github.yulichang.join.entity.AddressDO;
 import com.github.yulichang.join.entity.AreaDO;
-import com.github.yulichang.join.entity.UserAddressDO;
 import com.github.yulichang.join.entity.UserDO;
 import com.github.yulichang.join.mapper.UserMapper;
 import com.github.yulichang.query.MPJQueryWrapper;
 import com.github.yulichang.toolkit.MPJWrappers;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -30,6 +35,22 @@ class JoinTest {
     private UserMapper userMapper;
 
     /**
+     * 一对多
+     */
+    @Test
+    void testJoin() {
+        MPJLambdaWrapper<UserDO> wrapper = new MPJLambdaWrapper<UserDO>()
+                .selectAll(UserDO.class)
+                .selectCollection(AddressDO.class, UserDTO::getAddressList)
+                .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
+                .orderByDesc(UserDO::getId);
+
+        List<UserDTO> list = userMapper.selectJoinList(UserDTO.class, wrapper);
+        list.forEach(System.out::println);
+    }
+
+
+    /**
      * 简单的分页关联查询 lambda
      */
     @Test
@@ -37,10 +58,10 @@ class JoinTest {
         IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 MPJWrappers.<UserDO>lambdaJoin()
                         .selectAll(UserDO.class)
-                        .select(UserAddressDO::getAddress)
+                        .select(AddressDO::getAddress)
                         .select(AreaDO::getProvince)
-                        .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
-                        .leftJoin(AreaDO.class, AreaDO::getId, UserAddressDO::getAreaId));
+                        .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
+                        .leftJoin(AreaDO.class, AreaDO::getId, AddressDO::getAreaId));
         iPage.getRecords().forEach(System.out::println);
     }
 
@@ -51,7 +72,7 @@ class JoinTest {
     void test2() {
         MPJQueryWrapper<UserDO> wrapper = MPJWrappers.<UserDO>queryJoin()
                 .selectAll(UserDO.class)
-                .selectAll(UserAddressDO.class, "addr")
+                .selectAll(AddressDO.class, "addr")
                 .selectAll(AreaDO.class, "a")
                 .selectIgnore("addr.id", "a.id", "t.del", "addr.del")
                 .leftJoin("user_address addr on t.id = addr.user_id")
@@ -72,14 +93,14 @@ class JoinTest {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 MPJWrappers.<UserDO>lambdaJoin()
                         .selectAll(UserDO.class)
-                        .select(UserAddressDO::getAddress)
-                        .leftJoin(UserAddressDO.class, on -> on
-                                .eq(UserDO::getId, UserAddressDO::getUserId)
-                                .eq(UserDO::getId, UserAddressDO::getUserId))
+                        .select(AddressDO::getAddress)
+                        .leftJoin(AddressDO.class, on -> on
+                                .eq(UserDO::getId, AddressDO::getUserId)
+                                .eq(UserDO::getId, AddressDO::getUserId))
                         .eq(UserDO::getId, 1)
                         .and(i -> i.eq(UserDO::getHeadImg, "er")
                                 .or()
-                                .eq(UserAddressDO::getUserId, 1))
+                                .eq(AddressDO::getUserId, 1))
                         .eq(UserDO::getId, 1));
         page.getRecords().forEach(System.out::println);
     }
@@ -92,7 +113,7 @@ class JoinTest {
         UserDTO one = userMapper.selectJoinOne(UserDTO.class, MPJWrappers.<UserDO>lambdaJoin()
                 .selectSum(UserDO::getId)
                 .selectMax(UserDO::getId, UserDTO::getHeadImg)
-                .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
                 .eq(UserDO::getId, 1));
         System.out.println(one);
     }
@@ -106,11 +127,9 @@ class JoinTest {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 MPJWrappers.<UserDO>lambdaJoin()
                         .selectAll(UserDO.class)
-                        .selectAll(UserAddressDO.class)
-                        .selectIgnore(UserDO::getId)
-                        .selectIgnore(UserAddressDO::getId)
-                        .select(UserAddressDO::getAddress)
-                        .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                        .select(AddressDO.class, p -> true)
+                        .select(AddressDO::getAddress)
+                        .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
                         .eq(UserDO::getId, 1));
         page.getRecords().forEach(System.out::println);
     }
@@ -123,8 +142,8 @@ class JoinTest {
     void test7() {
         List<Map<String, Object>> list = userMapper.selectJoinMaps(MPJWrappers.<UserDO>lambdaJoin()
                 .selectAll(UserDO.class)
-                .select(UserAddressDO::getAddress)
-                .leftJoin(UserAddressDO.class, UserAddressDO::getUserId, UserDO::getId)
+                .select(AddressDO::getAddress)
+                .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
                 .eq(UserDO::getId, 1));
         list.forEach(System.out::println);
     }

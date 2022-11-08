@@ -15,4 +15,3 @@ mybatis-plus-join演示工程
 #### 项目结构
 
 * [join-demo 多表查询演示工程](https://gitee.com/best_handsome/mybatis-plus-join-demo/tree/master/join-demo)
-* [mapping-demo 一对一，一对多关系映射演示工程](https://gitee.com/best_handsome/mybatis-plus-join-demo/tree/master/mapping-demo)
