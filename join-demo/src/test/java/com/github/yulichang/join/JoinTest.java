@@ -1,8 +1,6 @@
 package com.github.yulichang.join;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.metadata.TableInfo;
-import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.join.dto.UserDTO;
 import com.github.yulichang.join.entity.AddressDO;
@@ -12,12 +10,10 @@ import com.github.yulichang.join.mapper.UserMapper;
 import com.github.yulichang.query.MPJQueryWrapper;
 import com.github.yulichang.toolkit.MPJWrappers;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +27,7 @@ import java.util.Map;
  */
 @SpringBootTest
 class JoinTest {
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     /**
@@ -127,7 +123,7 @@ class JoinTest {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
                 MPJWrappers.<UserDO>lambdaJoin()
                         .selectAll(UserDO.class)
-                        .select(AddressDO.class, p -> true)
+                        .selectFilter(AddressDO.class, p -> true)
                         .select(AddressDO::getAddress)
                         .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
                         .eq(UserDO::getId, 1));

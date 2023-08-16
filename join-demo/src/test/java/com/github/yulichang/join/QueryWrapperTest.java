@@ -7,15 +7,15 @@ import com.github.yulichang.join.entity.UserDO;
 import com.github.yulichang.join.mapper.UserMapper;
 import com.github.yulichang.query.MPJQueryWrapper;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
 class QueryWrapperTest {
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     /**
