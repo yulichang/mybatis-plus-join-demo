@@ -1,5 +1,6 @@
 package com.github.yulichang.join.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * 用户表
+ */
+//@Table
 @Data
 @ToString
 @Accessors(chain = true)

@@ -1,15 +1,21 @@
 package com.github.yulichang.join;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.yulichang.join.dto.UserDTO;
 import com.github.yulichang.join.entity.AddressDO;
 import com.github.yulichang.join.entity.AreaDO;
 import com.github.yulichang.join.entity.UserDO;
+import com.github.yulichang.join.mapper.AreaMapper;
 import com.github.yulichang.join.mapper.UserMapper;
+import com.github.yulichang.join.service.AreaService;
+import com.github.yulichang.join.service.UserService;
 import com.github.yulichang.query.MPJQueryWrapper;
+import com.github.yulichang.toolkit.JoinWrappers;
 import com.github.yulichang.toolkit.MPJWrappers;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import com.github.yulichang.wrapper.interfaces.Join;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,10 +31,16 @@ import java.util.Map;
  * <p>
  * 移除了mybatis-plus 逻辑删除支持，逻辑删除需要在连表查询时自己添加对应的条件
  */
-@SpringBootTest
+@SpringBootTest("mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl")
 class JoinTest {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AreaService areaService;
+    @Autowired
+    private AreaMapper areaMapper;
 
     /**
      * 一对多
@@ -45,20 +57,56 @@ class JoinTest {
         list.forEach(System.out::println);
     }
 
+    @Test
+    void testJoin1() {
+        MPJLambdaWrapper<UserDO> wrapper = new MPJLambdaWrapper<UserDO>()
+                .selectAll(UserDO.class)
+                .selectCollection(AddressDO.class, UserDTO::getAddressList)
+                .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
+                .orderByDesc(UserDO::getId);
+
+        List<UserDTO> list = userService.selectJoinList(UserDTO.class, wrapper);
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    void testJoin2() {
+        MPJLambdaWrapper<AreaDO> wrapper = new MPJLambdaWrapper<AreaDO>(AreaDO.class)
+                .selectAll()
+                .orderByDesc(UserDO::getId);
+
+        List<AreaDO> list = areaService.selectJoinList(AreaDO.class, wrapper);
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    void testJoin3() {
+        AreaDO area = new AreaDO();
+        area.setId(2);
+        area.setArea("asdfsdfsdf");
+
+//        areaService.update(area, Wrappers.<AreaDO>update().eq("id","1"));
+        areaMapper.update(area, JoinWrappers.lambda(AreaDO.class).eq("id","1"));
+
+        UserDO user = new UserDO();
+        user.setName("afsdfsdaf");
+        userMapper.update(user, Wrappers.<UserDO>update().eq("id","1"));
+    }
+
 
     /**
      * 简单的分页关联查询 lambda
      */
     @Test
     void test1() {
-        IPage<UserDTO> iPage = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
-                MPJWrappers.<UserDO>lambdaJoin()
+        Page<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
+                JoinWrappers.lambda(UserDO.class)
                         .selectAll(UserDO.class)
                         .select(AddressDO::getAddress)
                         .select(AreaDO::getProvince)
                         .leftJoin(AddressDO.class, AddressDO::getUserId, UserDO::getId)
                         .leftJoin(AreaDO.class, AreaDO::getId, AddressDO::getAreaId));
-        iPage.getRecords().forEach(System.out::println);
+        page.getRecords().forEach(System.out::println);
     }
 
     /**

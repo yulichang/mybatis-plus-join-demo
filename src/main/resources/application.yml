@@ -17,3 +17,9 @@ mybatis-plus:
     banner: true
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.github.yulichang.join.mapper: debug
+
+
