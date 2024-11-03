@@ -30,7 +30,7 @@ import java.util.Map;
  * <p>
  * 移除了mybatis-plus 逻辑删除支持，逻辑删除需要在连表查询时自己添加对应的条件
  */
-@SpringBootTest("mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl")
+@SpringBootTest
 class JoinTest {
     @Autowired
     private UserMapper userMapper;

@@ -6,8 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!--        <version>3.3.4</version>-->
-        <version>2.7.18</version>
+        <version>3.3.5</version>
     </parent>
     <description>mybatis-plus-join-demo</description>
     <groupId>com.github.yulichang</groupId>
@@ -41,12 +40,12 @@
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
             <version>${mp.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
             <version>${mp.version}</version>
         </dependency>
         <dependency>
