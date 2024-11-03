@@ -8,14 +8,15 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <!--        <version>3.3.4</version>-->
         <version>2.7.18</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <description>mybatis-plus-join-demo</description>
     <groupId>com.github.yulichang</groupId>
     <artifactId>mybatis-plus-join-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <mpj.version>1.5.1</mpj.version>
+        <mpj.version>1.5.2</mpj.version>
+        <mp.version>3.5.9</mp.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,63 +26,32 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.openjdk.nashorn</groupId>
-            <artifactId>nashorn-core</artifactId>
-            <version>15.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>3.0.21</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.python</groupId>
-            <artifactId>jython-standalone</artifactId>
-            <version>2.7.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.2.224</version>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.yulichang</groupId>-->
-<!--            <artifactId>mybatis-plus-join-boot-starter</artifactId>-->
-<!--            <version>${mpj.version}</version>-->
-<!--        </dependency>-->
-<!--                <dependency>-->
-<!--                    <groupId>com.github.yulichang</groupId>-->
-<!--                    <artifactId>mybatis-plus-spring-boot3-starter</artifactId>-->
-<!--                    <version>3.5.8-001</version>-->
-<!--                </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.baomidou</groupId>-->
-        <!--            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>-->
-        <!--            <version>3.5.7</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>com.github.yulichang</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.8-001</version>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+            <version>${mpj.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.baomidou</groupId>-->
-        <!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-        <!--            <version>3.5.7</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser-4.9</artifactId>
+            <version>${mp.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -89,33 +59,15 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-processor</artifactId>
+            <version>${mpj.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>utf-8</encoding>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>com.github.yulichang</groupId>
-                            <artifactId>mybatis-plus-join-processor</artifactId>
-                            <version>${mpj.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>1.18.34</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

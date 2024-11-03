@@ -36,22 +36,3 @@ create table user_address
     address varchar(255) null,
     del     bit
 );
-
-DROP TABLE IF EXISTS main_table;
-
-create table main_table
-(
-    main_id int auto_increment
-        primary key,
-    name    varchar(255) null,
-    phone   varchar(255) null
-);
-
-DROP TABLE IF EXISTS join_table;
-
-create table join_table
-(
-    id int auto_increment
-        primary key,
-    main_id    varchar(255) null
-);

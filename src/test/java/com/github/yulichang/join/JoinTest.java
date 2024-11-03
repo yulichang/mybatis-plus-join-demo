@@ -15,7 +15,6 @@ import com.github.yulichang.query.MPJQueryWrapper;
 import com.github.yulichang.toolkit.JoinWrappers;
 import com.github.yulichang.toolkit.MPJWrappers;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
-import com.github.yulichang.wrapper.interfaces.Join;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -71,7 +70,7 @@ class JoinTest {
 
     @Test
     void testJoin2() {
-        MPJLambdaWrapper<AreaDO> wrapper = new MPJLambdaWrapper<AreaDO>(AreaDO.class)
+        MPJLambdaWrapper<AreaDO> wrapper = new MPJLambdaWrapper<>(AreaDO.class)
                 .selectAll()
                 .orderByDesc(UserDO::getId);
 
@@ -85,12 +84,11 @@ class JoinTest {
         area.setId(2);
         area.setArea("asdfsdfsdf");
 
-//        areaService.update(area, Wrappers.<AreaDO>update().eq("id","1"));
-        areaMapper.update(area, JoinWrappers.lambda(AreaDO.class).eq("id","1"));
+        areaMapper.update(area, JoinWrappers.lambda(AreaDO.class).eq("id", "1"));
 
         UserDO user = new UserDO();
         user.setName("afsdfsdaf");
-        userMapper.update(user, Wrappers.<UserDO>update().eq("id","1"));
+        userMapper.update(user, Wrappers.<UserDO>update().eq("id", "1"));
     }
 
 
@@ -135,7 +133,7 @@ class JoinTest {
     @Test
     void test3() {
         IPage<UserDTO> page = userMapper.selectJoinPage(new Page<>(1, 10), UserDTO.class,
-                MPJWrappers.<UserDO>lambdaJoin()
+                JoinWrappers.lambda(UserDO.class)
                         .selectAll(UserDO.class)
                         .select(AddressDO::getAddress)
                         .leftJoin(AddressDO.class, on -> on

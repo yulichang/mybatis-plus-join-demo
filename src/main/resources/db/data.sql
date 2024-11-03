@@ -75,16 +75,3 @@ INSERT INTO user_address (id, user_id, area_id, tel, address, del) VALUES
 (20,20, 10020, '10000000020', '曹县20', false),
 (21,21, 10021, '10000000021', '曹县21', false),
 (22,22, 10022, '10000000022', '曹县22', false);
-
-
-INSERT INTO main_table (main_id, name, phone) VALUES
-(1,'aaa','111'),
-(2,'bbb','222'),
-(3,'ccc','333'),
-(4,'ddd','444');
-
-INSERT INTO join_table (id, main_id) VALUES
-(1,1),
-(2,2),
-(3,3),
-(4,4);
